@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	<typeAliases>
+		<!-- data==开始 -->
+		<typeAlias type="rxplatform.data.model.SchemeTable" alias="SchemeTable" />
+		<typeAlias type="rxplatform.data.model.SchemeColumn" alias="SchemeColumn" />
+		<typeAlias type="rxplatform.data.model.entity.DataTableEntity"
+			alias="DataTableEntity" />
+		<typeAlias type="rxplatform.data.model.entity.DataColumnEntity"
+			alias="DataColumnEntity" />
+		<typeAlias type="rxplatform.data.model.entity.DataVariableEntity"
+			alias="DataVariableEntity" />
+		<typeAlias type="rxplatform.data.model.entity.DataRuleEntity"
+			alias="DataRuleEntity" />
+		<typeAlias type="rxplatform.data.model.entity.DataGrantEntity"
+			alias="DataGrantEntity" />
+		<!-- data==结束 -->
+		<!-- system==开始 -->
+		<typeAlias type="rxplatform.system.model.entity.AttachmentEntity"
+			alias="AttachmentEntity" />
+		<typeAlias type="rxplatform.system.model.entity.CommonTypeEntity"
+			alias="CommonTypeEntity" />
+		<typeAlias type="rxplatform.system.model.entity.ControlUrlEntity"
+			alias="ControlUrlEntity" />
+		<typeAlias type="rxplatform.system.model.entity.DepartmentEntity"
+			alias="DepartmentEntity" />
+		<typeAlias type="rxplatform.system.model.entity.ErrorCodeEntity"
+			alias="ErrorCodeEntity" />
+		<typeAlias type="rxplatform.system.model.entity.GrantEntity"
+			alias="GrantEntity" />
+		<typeAlias type="rxplatform.system.model.entity.GrantProxyEntity"
+			alias="GrantProxyEntity" />
+		<typeAlias type="rxplatform.system.model.entity.LogEntity"
+			alias="LogEntity" />
+		<typeAlias type="rxplatform.system.model.entity.ParamEntity"
+			alias="ParamEntity" />
+		<typeAlias type="rxplatform.system.model.entity.ResourceEntity"
+			alias="ResourceEntity" />
+		<typeAlias type="rxplatform.system.model.entity.RoleEntity"
+			alias="RoleEntity" />
+		<typeAlias type="rxplatform.system.model.entity.RUserDeptEntity"
+			alias="RUserDepEntity" />
+		<typeAlias type="rxplatform.system.model.entity.RUserRoleEntity"
+			alias="RUserRoleEntity" />
+		<typeAlias type="rxplatform.system.model.entity.UserEntity"
+			alias="UserEntity" />
+		<typeAlias type="rxplatform.system.model.entity.EnterpriseEntity"
+			alias="EnterpriseEntity" />
+		<!-- system==结束 -->
+	</typeAliases>
+	<plugins>
+		<plugin interceptor="rxframework.persistent.plugin.StatementHandlerInterceptor">
+			<!-- 是否开启数据权限 -->
+			<property name="checkDataPermission" value="true"/>
+			<!-- 数据库方言 [mysql,sqlserver,oracle]-->
+			<property name="dbDialect" value="mysql"/>
+		</plugin>
+	</plugins>
+</configuration>
