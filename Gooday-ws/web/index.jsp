@@ -11,13 +11,17 @@ var socket = null;
 var isLogin = false;
 $(function(){
 
+    $("#exitButton").attr("disabled","disabled");
+
     // 聊天消息 指令
 	$("#sendButton").click(function() {
-		socket.send("message|"+$("#msg").val());
+	    var jsonStr = '{"cmd":"CMD_WEB_MSG","data":"'+$("#msg").val()+'"}';
+		socket.send(jsonStr);
 	});
 	// 设置背景 指令
 	$("#setBackground").click(function(){
-		socket.send("background|"+$("#fillColor").val());
+        var jsonStr = '{"cmd":"CMD_WEB_BG","data":"'+$("#fillColor").val()+'"}';
+		socket.send(jsonStr);
 	});
 	// 清屏
     $("#cleanButton").click(function(){
@@ -68,30 +72,36 @@ function binding(socket) {
     socket.onopen = function(evt) {
         console.log("onopen:" + evt);
         $("#showMsg").append("连接成功...<br/>");
+        $("#openButton").attr("disabled","disabled");
+        $("#exitButton").removeAttr("disabled");
     };
     //接收到服务器消息后调用
     socket.onmessage = function(message) {
-        var data = null;
+        var json = null;
         try{
-            data = parseObj(message.data);
+            json = parseObj(message.data);
         }catch(e){
             $("#showMsg").append("<span style='display:block;color:#FF0000'>server:"+message.data+"</span>");
             return;
         }
-        if(data.type=="message"){
-            $("#showMsg").append("server:"+data.text+"<br/>");
-        }else if(data.type=="background"){
-            $("#showMsg").append("改变当前背景色为:"+data.text+"<br/>");
-            $("body").css("background-color",data.text);
+        if(json.cmd=="CMD_WEB_MSG_RESP"){
+            $("#showMsg").append("server:"+json.data+"<br/>");
+        }else if(json.cmd=="CMD_WEB_BG_RESP"){
+            $("#showMsg").append("改变当前背景色为:"+json.data+"<br/>");
+            $("body").css("background-color",json.data);
         }
     };
     //关闭连接的时候调用
     socket.onclose = function(evt){
+        $("#openButton").removeAttr("disabled");
+        $("#exitButton").attr("disabled","disabled");
         console.log("close:" + evt);
         alert("close");
     };
     //出错时调用
     socket.onerror = function(evt) {
+        $("#openButton").removeAttr("disabled");
+        $("#exitButton").attr("disabled","disabled");
         console.log("error:" + evt);
         alert("error");
     };

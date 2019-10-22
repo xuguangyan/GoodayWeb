@@ -85,7 +85,10 @@
 				<property name="excludeUrls">
 					<list>
 						<value>webapi/login</value>
+						<value>webapi/logout</value>
 						<value>webapi/message</value>
+						<value>webapi/map</value>
+						<value>webapi/getMapData</value>
 						<value>socket</value>
 					</list>
 				</property>
